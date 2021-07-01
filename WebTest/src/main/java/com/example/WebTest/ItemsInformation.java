@@ -32,7 +32,7 @@ public class ItemsInformation extends HttpServlet {
             for(Item item:items){
                 System.out.println(item);
             }
-            request.getRequestDispatcher("../User.jsp").forward(request, response);
+            request.getRequestDispatcher("../User/User.jsp").forward(request, response);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

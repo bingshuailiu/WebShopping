@@ -12,7 +12,6 @@ public class LoginServlet extends HttpServlet {
 
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //post请求处理中文乱码，只能post用
         request.setCharacterEncoding("utf-8");
         String username = request.getParameter("username");
         byte[] bs = username.getBytes("iso-8859-1");//将字符串以指定编码成新的字符数组
@@ -47,19 +46,12 @@ public class LoginServlet extends HttpServlet {
         }
 
         if (isManager){
-            response.sendRedirect("../Manager.jsp");
+            response.sendRedirect("../Manager/Manager.jsp");
         }
         else if(isUser){
-            /*request.getSession().setAttribute("name",request.getRemoteAddr()+username);
-
-            //登录成功后，保存名称为JSESSIONID的id的cookie，值为session的id
-            Cookie c = new Cookie("JSESSIONID",request.getSession().getId());
-            c.setMaxAge(60*100);
-            c.setPath("/");
-            response.addCookie(c);*/
             request.getSession().setAttribute("username",username);
             /*System.out.println("成功设置Session");*/
-            response.sendRedirect("../User.jsp");
+            response.sendRedirect("../User/User.jsp");
         }else{
             response.sendRedirect("../welcome.jsp");
         }

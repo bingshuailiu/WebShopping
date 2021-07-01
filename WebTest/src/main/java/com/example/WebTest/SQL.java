@@ -51,6 +51,15 @@ public class SQL {
         return true;
     }
 
+    public ResultSet getShoppingCart(String account){
+        String s="select * from shopping_cart" +
+                " where ";
+        Statement stmt=connection.createStatement();
+        ResultSet rs;
+        rs=stmt.executeQuery(s);
+
+    }
+
     public int checkUserDelete() throws SQLException {
         String query= "select * from user;";
         Statement stmt=connection.createStatement();

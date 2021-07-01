@@ -10,19 +10,6 @@
     <title>欢迎登录</title>
 </head>
 <body>
-<%--
-<%
-    //首先进入登陆页面先判断是否存在cookie，如果是跳转到欢迎界面
-    Cookie[] cookies=request.getCookies();
-    if(cookies!=null){
-        for(int i=0;i<cookies.length;i++) {
-            if(cookies[i].getName().equals("name")){
-                //如果cookie与保存的相等，即找到cookie
-                response.sendRedirect("bootstrap.jsp");
-            }
-        }
-    }
-%>--%>
 <br><br><br><br><br>
 
 <div class="jumbotron">
@@ -53,8 +40,7 @@
             <input type="submit" class="col-sm-1 col-md-offset-5 btn btn-primary" value="登陆">
             <input type="reset"  class="col-sm-1 col-md-offset-1 btn btn-primary" value="重置">
             <input type="button"  class="col-sm-1 col-md-offset-1 btn btn-primary" value="注册"
-            onclick="window.location='register.jsp'">
-
+            onclick="window.location='User/register.jsp'">
         </form>
     </div>
 </div>
