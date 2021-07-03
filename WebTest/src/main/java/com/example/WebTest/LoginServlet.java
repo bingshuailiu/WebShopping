@@ -46,11 +46,11 @@ public class LoginServlet extends HttpServlet {
         }
 
         if (isManager){
+            request.getSession().setAttribute("manager",username);
             response.sendRedirect("../Manager/Manager.jsp");
         }
         else if(isUser){
             request.getSession().setAttribute("username",username);
-            /*System.out.println("成功设置Session");*/
             response.sendRedirect("../User/User.jsp");
         }else{
             response.sendRedirect("../welcome.jsp");

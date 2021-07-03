@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 
+
 <%@ page language="java" contentType="text/html; charset=utf-8"  pageEncoding="utf-8"%>
 
 <html>
@@ -16,25 +17,35 @@
   }														<!-- align: left(靠左)，center(居中)，right(靠右) -->
 
   </style>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h3>用户注册</h3>
-<form action="Tomcat/Register" method="post"><table>				<!-- form创建表单，method：提交方式 -->
-  <!-- class="right" （选择表格的元素）-->
-  <tr> <td class="right">用户名：</td> <td><input type="text" name="username"/></td></tr>
-  <tr> <td class="right">密码：</td><td><input type="password" name="password"/></td></tr>
-  <tr><td class="right">确认密码：</td><td> <input type="password" name="repassword"/></td> </tr>
-  <tr>
-    <td class="right">性别：</td>
-    <td>
-      <input type="radio" name="sex" value="男" checked="checked"/>男 		<!-- checked="checked"默认选择项 -->
-      <input type="radio" name="sex" value="女" /> 女
-    </td>
-  </tr>
-  <tr><td class="right">手机号码：</td><td><input type="text" name="phone"/></td></tr>
-  <tr><td class="right">电子邮箱：</td><td><input type="text" name="email"/></td></tr>
-  <tr><td></td><td><input type="submit" value="注册"/><input type="reset" value="重置"></td>  </tr>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-offset-4">
+      <h3>用户注册</h3>
 
-</table></form>
+      <form action="../Tomcat/Register" method="post"><table>				<!-- form创建表单，method：提交方式 -->
+        <!-- class="right" （选择表格的元素）-->
+        <tr> <td class="right">用户名：</td> <td><input type="text" name="username"/></td></tr>
+        <tr> <td class="right">密码：</td><td><input type="password" name="password"/></td></tr>
+        <tr><td class="right">确认密码：</td><td> <input type="password" name="repassword"/></td> </tr>
+        <tr>
+          <td class="right">性别：</td>
+          <td>
+            <input type="radio" name="sex" value="男" checked="checked"/>男 		<!-- checked="checked"默认选择项 -->
+            <input type="radio" name="sex" value="女" /> 女
+          </td>
+        </tr>
+        <tr><td class="right">手机号码：</td><td><input type="text" name="phone"/></td></tr>
+        <tr><td class="right">电子邮箱：</td><td><input type="text" name="email"/></td></tr>
+        <tr><td></td><td><input type="submit" value="注册"/><input type="reset" value="重置"></td>  </tr>
+
+      </table></form>
+    </div>
+  </div>
+</div>
+
+
 </body>
 </html>

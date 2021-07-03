@@ -9,6 +9,57 @@
     </welcome-file-list>
 
     <servlet>
+        <servlet-name>OrderControl</servlet-name>
+        <servlet-class>com.example.WebTest.OrderControl</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderControl</servlet-name>
+        <url-pattern>/Tomcat/OrderControl</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>DeleteUserCascade</servlet-name>
+        <servlet-class>com.example.WebTest.DeleteUserCascade</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DeleteUserCascade</servlet-name>
+        <url-pattern>/Tomcat/DeleteUserCascade</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>ChangeUserInformation</servlet-name>
+        <servlet-class>com.example.WebTest.ChangeUserInformation</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ChangeUserInformation</servlet-name>
+        <url-pattern>/Tomcat/ChangeUserInformation</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>RetrieveItems</servlet-name>
+        <servlet-class>com.example.WebTest.RetrieveItems</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RetrieveItems</servlet-name>
+        <url-pattern>/Tomcat/RetrieveItems</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ReduceShoppingItems</servlet-name>
+        <servlet-class>com.example.WebTest.ReduceShoppingItems</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReduceShoppingItems</servlet-name>
+        <url-pattern>/Tomcat/ReduceShoppingItems</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>ReleaseItems</servlet-name>
+        <servlet-class>com.example.WebTest.ReleaseItems</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReleaseItems</servlet-name>
+        <url-pattern>/Tomcat/ReleaseItems</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>shopping_cart</servlet-name>
         <servlet-class>com.example.WebTest.shopping_cart</servlet-class>
     </servlet>
@@ -41,39 +92,4 @@
         <servlet-name>LoginServ</servlet-name>
         <url-pattern>/Tomcat/LoginServ</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>DownServlet</servlet-name>
-        <servlet-class>com.example.WebTest.DownServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DownServlet</servlet-name>
-        <url-pattern>/Tomcat/DownServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>com.example.WebTest.HelloServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/Tomcat/HelloServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>DisplayHeader</servlet-name>
-        <servlet-class>com.example.WebTest.DisplayHeader</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>DisplayHeader</servlet-name>
-        <url-pattern>/Tomcat/DisplayHeader</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>Refresh</servlet-name>
-        <servlet-class>com.example.WebTest.Refresh</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Refresh</servlet-name>
-        <url-pattern>/Tomcat/Refresh</url-pattern>
-    </servlet-mapping>
-
-
-
 </web-app>

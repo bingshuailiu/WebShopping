@@ -5,16 +5,21 @@ import Classes.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 
 public class test {
 
     public static void main(String [] args) throws SQLException {
+        Random random=new Random();
         SQL sql =new SQL();
-        Item item1=new Item("root","自行车","交通工具",1,1000.0);
-        Item item2=new Item("root","火锅底料","食品",2,30.0);
-        Item item3=new Item("root","化妆镜","生活用品",1,10.0);
-        sql.insertItems(item1);
-        sql.insertItems(item2);
-        sql.insertItems(item3);
+        for(int i=0;i<100;i++){
+            String sex=random.nextInt(2)==1?"男":"女";
+            String email="123456@qq.com";
+            String phone= String.valueOf(random.nextInt(10000)+10000);
+            String password= String.valueOf(random.nextInt(100000)+100000);
+            String account= "a"+String.valueOf(random.nextInt(10000)+10000);
+            User user=new User(sex,email,phone,account,password);
+            sql.insertUser(user);
+        }
     }
 }
