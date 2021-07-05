@@ -9,6 +9,14 @@
     </welcome-file-list>
 
     <servlet>
+        <servlet-name>AddOrder</servlet-name>
+        <servlet-class>com.example.WebTest.AddOrder</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddOrder</servlet-name>
+        <url-pattern>/Tomcat/AddOrder</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>OrderControl</servlet-name>
         <servlet-class>com.example.WebTest.OrderControl</servlet-class>
     </servlet>

@@ -6,6 +6,8 @@ import Classes.User;
 import Classes.shopping_cart_item;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class SQL {
     private Connection connection;
@@ -18,6 +20,13 @@ public class SQL {
         ResultSet rs;
         rs=stmt.executeQuery(s);
         return rs;
+    }
+
+    public boolean foreignCheckStatus(boolean start) throws SQLException {
+        Statement stmt = connection.createStatement();
+        String s="SET foreign_key_checks ="+(start?1:0)+";";
+        stmt.execute(s);
+        return true;
     }
 
     public boolean insertShoppingCart(shopping_cart_item item) throws SQLException {
@@ -81,6 +90,20 @@ public class SQL {
         return true;
     }
 
+    public boolean deleteUserShoppingCart(shopping_cart_item item) throws SQLException{
+        foreignCheckStatus(false);
+        String s="delete from shopping_cart" +
+                " where buyerAccount='" + item.getBuyerAccount()+
+                "' and sellerAccount='"+item.getSellerAccount()+
+                "' and name='"+item.getName()+
+                "' and price="+item.getPrice()+
+                ";";
+        Statement stmt=connection.createStatement();
+        stmt.execute(s);
+        foreignCheckStatus(true);
+        return true;
+    }
+
     public boolean deleteShoppingCart(shopping_cart_item item) throws SQLException {
         String s="delete from shopping_cart" +
                 " where buyerAccount='" + item.getBuyerAccount()+
@@ -103,6 +126,18 @@ public class SQL {
             }
         }
         return false;
+    }
+
+    public boolean insertOrder(shopping_cart_item item) throws SQLException{
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        String x=df.format(new Date());
+        String s="insert into orders values("+"'"+
+                item.getBuyerAccount()+"','"+item.getSellerAccount()+"','"+
+                x+"','" +item.getName()+
+                "',"+item.getPrice()+","+item.getBuyCount()+");";
+        Statement stmt = connection.createStatement();
+        stmt.execute(s);
+        return true;
     }
 
     public boolean updateUser(User user)throws SQLException {
@@ -195,6 +230,15 @@ public class SQL {
         return rs;
     }
 
+    public ResultSet getOrders(String account) throws SQLException {
+        String s="select * from orders" +
+                " where buyerAccount='"+account+"';";
+        Statement stmt=connection.createStatement();
+        ResultSet rs;
+        rs=stmt.executeQuery(s);
+        return rs;
+    }
+
     public int getUserCount()throws SQLException{
         String s="select * from user;";
         Statement stmt=connection.createStatement();
@@ -219,6 +263,17 @@ public class SQL {
         ResultSet rs;
         rs=stmt.executeQuery(s);
         return rs;
+    }
+
+    public boolean reduceItem(Item item)throws SQLException{
+        Statement stmt = connection.createStatement();
+        String s="update items" +
+                " set count=count-"+item.getCount()+
+                " where account='"+item.getAccount()+
+                "' and name='"+item.getName()+
+                "' and price="+ item.getPrice()+";";
+        stmt.execute(s);
+        return true;
     }
 
     public boolean deleteItem(Item item)throws SQLException{

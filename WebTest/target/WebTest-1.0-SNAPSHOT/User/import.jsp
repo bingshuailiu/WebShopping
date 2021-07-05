@@ -8,7 +8,7 @@
 
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<style type="text/css">
+<%--<style type="text/css">
   table.altrowstable {
     font-family: verdana,arial,sans-serif;
     font-size:11px;
@@ -56,6 +56,7 @@
   window.onload=function(){
     altRows('alternatecolor');
   }
-</script>
-<link rel="stylesheet" type="text/css" href="../css/User.css">
-<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</script>--%>
+<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="../css/main.css"><%--
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">--%>

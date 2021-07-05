@@ -6,13 +6,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="com.example.WebTest.shopping_cart"%>
-<%@ page import="com.example.WebTest.ItemsInformation" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Classes.shopping_cart_item" %>
 <%@ page import="Classes.Item" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    ArrayList<shopping_cart_item> chosedItems=new ArrayList<shopping_cart_item>();
     shopping_cart temp=new shopping_cart();
     ArrayList<shopping_cart_item> items=temp.getShoppingCart((String)session.getAttribute("username"));
     int x=-1;
@@ -23,8 +21,17 @@
     <jsp:include page="import.jsp" flush="true"></jsp:include>
     <script type="text/javascript">
         var sum=0;
-        function shops(o){
-            sum+=parseInt(o.checked?o.value:-o.value);//如果选中就加选中的那个复选框的值，否则就减去
+        function shops(o,x){
+            var z="";
+            z=x;
+            var input=document.getElementById(z);
+
+            if(o.checked){
+                sum+=parseInt(input.value);
+            }else{
+                sum-=parseInt(input.value);
+            }
+
             document.getElementById('total').innerHTML='商品总价：'+sum+'元';
         }
         function check(size){
@@ -56,6 +63,21 @@
                 }
             }
         }
+
+        function delP() {
+            var param=""; //它是用于拼接参数.
+            var checkChoice = document.getElementsByName("checkChoose");
+            for ( var i = 0; i < checkChoice.length; i++) {
+                if (checkChoice[i].checked === true) {
+                    param+="id="+checkChoice[i].value+"&";
+                }
+            }
+
+            if(param!==""){
+                param=param.substring(0,param.length-1);
+                window.location="../Tomcat/OrderControl?"+param;
+            }
+        };
     </script>
     <title>购物车</title>
 </head>
@@ -63,7 +85,6 @@
 <jsp:include flush="true" page="checkLogin.jsp"></jsp:include>
 
 <jsp:include page="head.jsp" flush="true"></jsp:include>
-<% double sum=0; %>
 <div class="container">
     <div class="row">
         <div class="col-sm-offset-4">
@@ -76,7 +97,6 @@
                     <th>数量</th>
                     <th>单品价格</th>
                     <th>点击确定减少物品</th>
-                    <th>结算</th>
                 </tr>
                 <%
 
@@ -84,7 +104,9 @@
                         x++;
                 %>
                 <tr>
-                    <td><input type="checkbox" id="item<%=x%>" value="<%=item.getPrice()*item.getBuyCount()%>" onclick="shops(this)"></td>
+                    <td><input type="checkbox" id="item<%=x%>" name="checkChoose" value="<%=item.getBuyerAccount()+","+item.getSellerAccount()+","+
+                    item.getName()+","+item.getBuyCount()+","+item.getPrice() %>" onclick="shops(this,<%=x%>)"></td>
+                    <input type="hidden" id="<%=x%>" value="<%=item.getPrice()*item.getBuyCount()%>">
                     <td><%=item.getName()%></td>
                     <td><%=item.getBuyCount()%></td>
                     <td><%=item.getPrice()%></td>
@@ -100,22 +122,12 @@
                             <input type="submit" value="确定"/>
                         </form>
                     </td>
-                    <td>
-                        <form action="../Tomcat/OrderControl" method="post">
-                            <input type="hidden" name="buyerAccount" value="<%= item.getBuyerAccount()%>"/>
-                            <input type="hidden" name="sellerAccount" value="<%= item.getSellerAccount()%>"/>
-                            <input type="hidden" name="name" value="<%= item.getName()%>"/>
-                            <input type="hidden" name="price" value="<%= item.getPrice()%>"/>
-                            <input type="hidden" name="buyCount" value="<%=item.getBuyCount()%>">
-                            <input type="submit" value="结算"/>
-                        </form>
-                    </td>
                 </tr>
                 <% } %>
                 <tr class="alt" >
                     <td class="center" colspan="5">
                         <div id="total">商品总价：0元</div>
-                        <div><button>结算</button></div>
+                        <div><button type="button" onclick="delP()">结算</button></div>
                     </td>
                 </tr>
             </table>

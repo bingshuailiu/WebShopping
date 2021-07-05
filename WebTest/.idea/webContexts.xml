@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/Manager/Manager.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Manager" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/Manager/modifyUser.jsp" value="file://$PROJECT_DIR$/src/main/webapp/Manager" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/User/myReleaseItems.jsp" value="file://$PROJECT_DIR$/src/main/webapp/User" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/test.jsp" value="file://$PROJECT_DIR$/src/main/webapp" />
       </map>
