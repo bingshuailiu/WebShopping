@@ -6,6 +6,15 @@ public class Item {
     private String type;
     private int count;
     private double price;
+    private String img;
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
 
     @Override
     public String toString() {
@@ -16,6 +25,15 @@ public class Item {
                 ", count=" + count +
                 ", price=" + price +
                 '}';
+    }
+
+    public Item(String account, String name, String type, int count, double price,String img) {
+        this.account = account;
+        this.name = name;
+        this.type = type;
+        this.count = count;
+        this.price = price;
+        this.img=img;
     }
 
     public Item(String account, String name, String type, int count, double price) {

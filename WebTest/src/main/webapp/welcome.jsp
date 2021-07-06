@@ -48,7 +48,7 @@
             <input type="submit" class="col-sm-1 col-md-offset-5 btn btn-primary" value="登陆">
             <input type="reset"  class="col-sm-1 col-md-offset-1 btn btn-primary" value="重置">
             <input type="button"  class="col-sm-1 col-md-offset-1 btn btn-primary" value="注册"
-            onclick="window.location='User/register.jsp'">
+            onclick="window.location='register.jsp'">
         </form>
     </div>
 </div>

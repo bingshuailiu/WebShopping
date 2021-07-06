@@ -239,6 +239,15 @@ public class SQL {
         return rs;
     }
 
+    public int getItemCount()throws SQLException{
+        String s="select * from items;";
+        Statement stmt=connection.createStatement();
+        ResultSet rs;
+        rs=stmt.executeQuery(s);
+        rs.last();
+        return rs.getRow();
+    }
+
     public int getUserCount()throws SQLException{
         String s="select * from user;";
         Statement stmt=connection.createStatement();

@@ -13,7 +13,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-  <jsp:include page="import.jsp" flush="true"></jsp:include>
+  <jsp:include page="oldImport.jsp" flush="true"></jsp:include>
   <title>我的商品</title>
 </head>
 <body>

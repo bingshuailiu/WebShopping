@@ -1,10 +1,15 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: 沐夏季风
+  Date: 2021/7/6
+  Time: 8:08
+  To change this template use File | Settings | File Templates.
+--%>
 
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta http-equiv="Content-Type" content="register/html; charset=UTF-8">
-    <title>注册</title>
+    <title>Title</title>
     <style>
         * {
             margin: 0;
@@ -17,7 +22,7 @@
             overflow: hidden;
             margin: 0;
             padding: 0;
-            background: url(img/Desert.jpg) no-repeat 0px 0px;
+            background: url(Desert.jpg) no-repeat 0px 0px;
             background-repeat: no-repeat;
             background-size: 100% 100%;
             -moz-background-size: 100% 100%;
@@ -108,16 +113,17 @@
             font-weight: initial;
         }
     </style>
-</head>
 
+</head>
 <body>
+
 <div id="loginDiv">
 
     <form action="">
         <h1>用户注册</h1>
         <p>用户名:&emsp;<input type="text" name="username" autofocus required><label id="name_trip"></label></p>
 
-        <p>密码:&emsp;&emsp;<input type="password" name="passwod" required></p>
+        <p>密码:&emsp;&emsp;<input type="password" name="password" required></p>
 
         <p>确认密码:<input type="password" name="repassword" required></p>
 
@@ -126,8 +132,8 @@
             <input type="radio" name="sex" value="男" checked="checked"/>男
             <input type="radio" name="sex" value="女" /> 女
         </div>
-        <p>手机号码:<input type="tet" name="phone" required></p>
-        <p>电子邮箱:<input type="tet" name="email" required></p>
+        <p>手机号码:<input type="text" name="phone" required></p>
+        <p>电子邮箱:<input type="text" name="email" required></p>
 
         <p style="text-align: center;">
             <input type="submit" class="button" value="注册"/>
@@ -135,7 +141,5 @@
         </p>
     </form>
 </div>
-
 </body>
 </html>
-

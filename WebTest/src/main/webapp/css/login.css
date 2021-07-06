@@ -1,7 +1,6 @@
 body {
-    background: url("../img/12345.jpg") center;
     background-size: 120% auto;
-    background-repeat: no-repeat;
+    background: url("../img/12345.jpg") no-repeat center;
 }
 
 #login-box {
@@ -16,7 +15,6 @@ body {
 
 #login-box h1 {
     color: white;
-
 }
 
 #login-box .form .item {

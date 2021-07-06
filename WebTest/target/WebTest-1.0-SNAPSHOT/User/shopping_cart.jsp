@@ -18,7 +18,7 @@
 <html>
 <head>
 
-    <jsp:include page="import.jsp" flush="true"></jsp:include>
+    <jsp:include page="oldImport.jsp" flush="true"></jsp:include>
     <script type="text/javascript">
         var sum=0;
         function shops(o,x){
