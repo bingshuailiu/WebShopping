@@ -1,7 +1,6 @@
 package com.example.WebTest;
 
 import Classes.Item;
-import Classes.User;
 
 import java.nio.charset.StandardCharsets;
 import java.sql.ResultSet;
@@ -77,6 +76,7 @@ public class ControlItem {
         }
         return pageItems;
     }
+
     public ArrayList<Item> getRelevantItems(String keyword){
         keyword=tranString(keyword);
         System.out.println(keyword);

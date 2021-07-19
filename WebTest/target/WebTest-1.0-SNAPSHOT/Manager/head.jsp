@@ -10,6 +10,7 @@
     <div id="nav2">
         <ul>
             <li><a href="../Manager/Manager.jsp">首页</a></li>
+            <li><a href="../Manager/order.jsp">订单</a> </li>
         </ul>
         <div class="col-sm-offset-9">
             <p>管理员：<%= session.getAttribute("manager")%>

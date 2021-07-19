@@ -1,5 +1,6 @@
 package com.example.WebTest;
 
+import Classes.Item;
 import Classes.Order;
 import Classes.shopping_cart_item;
 import javax.servlet.ServletException;
@@ -21,7 +22,46 @@ public class OrderControl extends HttpServlet {
         s=new String(bs, StandardCharsets.UTF_8);
         return s;
     }
+    private ArrayList<Order> orders;
+    public OrderControl() throws SQLException {
+        orders=new ArrayList<>();
+        SQL sql=new SQL();
+        ResultSet rs=sql.getRs("orders");
+        while(rs.next()){
+            Order temp=new Order(rs.getString("buyerAccount"),
+                    rs.getString("sellerAccount"),rs.getString("date"),
+                    rs.getString("name"),rs.getDouble("price"),
+                    rs.getInt("buyCount"));
+            orders.add(temp);
+        }
+    }
+    public int getOrderCount(){
+        return orders.size();
+    }
+    public int getOrderCount(String keyword){
+        return getRelevantOrders(keyword).size();
+    }
+    public ArrayList<Order> getOrders(int pageIndex) throws SQLException{
+        ArrayList<Order> pageOrders=new ArrayList<>();
+        int lIndex=(pageIndex-1)*10;
+        int rIndex= Math.min((lIndex + 10), orders.size());
 
+        for(int i=lIndex;i<rIndex;i++){
+            pageOrders.add(orders.get(i));
+        }
+        return pageOrders;
+    }
+    public ArrayList<Order> getOrders(int pageIndex,String keyword) throws SQLException{
+        ArrayList<Order> releItems= getRelevantOrders(keyword);
+        ArrayList<Order> pageOrders=new ArrayList<>();
+        int lIndex=(pageIndex-1)*10;
+        int rIndex= Math.min((lIndex + 10), orders.size());
+
+        for(int i=lIndex;i<rIndex;i++){
+            pageOrders.add(releItems.get(i));
+        }
+        return pageOrders;
+    }
     public ArrayList<Order> getUserOrder(String account){
         SQL sql;
         ArrayList<Order> orders=new ArrayList<>();
@@ -43,7 +83,17 @@ public class OrderControl extends HttpServlet {
         return orders;
     }
 
-
+    public ArrayList<Order> getRelevantOrders(String keyword){
+        keyword=tranString(keyword);
+        System.out.println(keyword);
+        ArrayList<Order> releOrders=new ArrayList<>();
+        for(Order order:orders){
+            if(order.getBuyerAccount().contains(keyword)){
+                releOrders.add(order);
+            }
+        }
+        return releOrders;
+    }
     public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String[] id = request.getParameterValues("id");

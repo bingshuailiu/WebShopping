@@ -27,8 +27,9 @@ CREATE TABLE `items` (
   `name` varchar(255) NOT NULL,
   `type` varchar(50) DEFAULT NULL,
   `count` int DEFAULT NULL,
-  `price` double DEFAULT NULL,
-  PRIMARY KEY (`account`,`name`)
+  `price` double NOT NULL,
+  `img` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`account`,`name`,`price`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -38,7 +39,7 @@ CREATE TABLE `items` (
 
 LOCK TABLES `items` WRITE;
 /*!40000 ALTER TABLE `items` DISABLE KEYS */;
-INSERT INTO `items` VALUES ('root','化妆镜','生活用品',1,10),('root','火锅底料','食品',2,30),('root','自行车','交通工具',1,1000);
+INSERT INTO `items` VALUES ('13843869423','BOSE耳机','数码类',1,500,NULL),('13843869423','CASIO手表','数码类',1,100,NULL),('13843869423','书架','生活用品',1,30,NULL),('13843869423','山地自行车','其他',1,2000,NULL),('13843869423','收纳盒','生活用品',1,10,NULL),('13843869423','水杯','生活用品',1,30,NULL),('13843869423','水浒传','学习用品',2,99,NULL),('13843869423','洗发水','生活用品',1,99,NULL),('13843869423','相机','数码类',1,99,NULL),('13843869423','钢笔','学习用品',1,99,NULL),('root','化妆镜','生活用品',1,10,NULL),('root','火锅底料','食品',1,30,NULL),('root','自行车','交通工具',1,1000,NULL);
 /*!40000 ALTER TABLE `items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -92,6 +93,36 @@ INSERT INTO `manager` VALUES ('root','asdfghjkl;\'');
 UNLOCK TABLES;
 
 --
+-- Table structure for table `orders`
+--
+
+DROP TABLE IF EXISTS `orders`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `orders` (
+  `buyerAccount` varchar(50) NOT NULL,
+  `sellerAccount` varchar(50) NOT NULL,
+  `date` datetime NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `price` double NOT NULL,
+  `buyCount` int DEFAULT NULL,
+  UNIQUE KEY `orders_pk` (`price`,`buyerAccount`,`sellerAccount`,`name`,`date`),
+  KEY `orders_shopping_cart_buyerAccount_sellerAccount_name_price_fk` (`buyerAccount`,`sellerAccount`,`name`,`price`),
+  CONSTRAINT `orders_shopping_cart_buyerAccount_sellerAccount_name_price_fk` FOREIGN KEY (`buyerAccount`, `sellerAccount`, `name`, `price`) REFERENCES `shopping_cart` (`buyerAccount`, `sellerAccount`, `name`, `price`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `orders`
+--
+
+LOCK TABLES `orders` WRITE;
+/*!40000 ALTER TABLE `orders` DISABLE KEYS */;
+INSERT INTO `orders` VALUES ('13843869423','root','2021-07-05 14:27:19','化妆镜',10,1),('13843869423','root','2021-07-04 14:33:30','火锅底料',30,2),('13843869423','root','2021-07-05 14:34:51','火锅底料',30,1),('13843869423','root','2021-07-04 14:33:30','自行车',1000,1);
+/*!40000 ALTER TABLE `orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `shopping_cart`
 --
 
@@ -103,9 +134,10 @@ CREATE TABLE `shopping_cart` (
   `sellerAccount` varchar(50) NOT NULL,
   `name` varchar(255) NOT NULL,
   `buyCount` int DEFAULT NULL,
-  PRIMARY KEY (`buyerAccount`,`sellerAccount`,`name`),
-  KEY `Shopping_Cart_items_account_name_fk` (`sellerAccount`,`name`),
-  CONSTRAINT `Shopping_Cart_items_account_name_fk` FOREIGN KEY (`sellerAccount`, `name`) REFERENCES `items` (`account`, `name`),
+  `price` double NOT NULL,
+  PRIMARY KEY (`buyerAccount`,`sellerAccount`,`name`,`price`),
+  KEY `Shopping_Cart_items_account_name_fk` (`sellerAccount`,`name`,`price`),
+  CONSTRAINT `Shopping_Cart_items_account_name_fk` FOREIGN KEY (`sellerAccount`, `name`, `price`) REFERENCES `items` (`account`, `name`, `price`),
   CONSTRAINT `Shopping_Cart_user_account_fk` FOREIGN KEY (`buyerAccount`) REFERENCES `user` (`account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -116,6 +148,7 @@ CREATE TABLE `shopping_cart` (
 
 LOCK TABLES `shopping_cart` WRITE;
 /*!40000 ALTER TABLE `shopping_cart` DISABLE KEYS */;
+INSERT INTO `shopping_cart` VALUES ('13843869423','root','自行车',1,1000);
 /*!40000 ALTER TABLE `shopping_cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +165,6 @@ CREATE TABLE `user` (
   `email` varchar(255) DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
   `sex` varchar(10) DEFAULT NULL,
-  `del` int DEFAULT NULL,
   PRIMARY KEY (`account`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -143,7 +175,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('123456','132','1187291748@qq.com','13843869423','男',0),('123456789','asdfghj','123@qq.com','123456','male',0);
+INSERT INTO `user` VALUES ('13843869423','111','1187291748@qq.com','13843869423','男'),('a11035','1','123456@qq.com','16872','女'),('a11124','106914','123456@qq.com','11295','男'),('a11300','121377','123456@qq.com','11495','男'),('a11458','194890','123456@qq.com','19213','女'),('a11539','165382','123456@qq.com','18041','女'),('a11691','108787','123456@qq.com','17242','男'),('a11863','101510','123456@qq.com','11151','女'),('a11955','180404','123456@qq.com','16021','男'),('a12038','153992','123456@qq.com','14545','男'),('a12532','135063','123456@qq.com','13556','女'),('a12561','157115','123456@qq.com','15984','女'),('a12581','181332','123456@qq.com','19803','女'),('a12729','197076','123456@qq.com','12519','女'),('a12887','141937','123456@qq.com','14343','男'),('a12934','110515','123456@qq.com','19597','女'),('a12952','147622','123456@qq.com','16056','男'),('a12984','170986','123456@qq.com','17940','女'),('a13095','147689','123456@qq.com','18043','男'),('a13174','168942','123456@qq.com','17808','女'),('a13226','163083','123456@qq.com','13933','女'),('a13412','104597','123456@qq.com','15633','女'),('a13433','198029','123456@qq.com','12266','女'),('a13561','163177','123456@qq.com','12649','女'),('a13686','189574','123456@qq.com','10521','女'),('a13793','129663','123456@qq.com','19821','男'),('a13820','153452','123456@qq.com','16241','男'),('a13962','196944','123456@qq.com','12891','男'),('a14097','153067','123456@qq.com','19438','女'),('a14284','144103','123456@qq.com','18647','男'),('a14506','188514','123456@qq.com','19978','男'),('a14533','126610','123456@qq.com','19363','男'),('a14549','171664','123456@qq.com','14580','女'),('a14603','160596','123456@qq.com','14845','女'),('a14638','136890','123456@qq.com','15304','男'),('a14686','158605','123456@qq.com','16608','女'),('a14691','165573','123456@qq.com','11151','女'),('a14739','127486','123456@qq.com','13946','女'),('a14740','130998','123456@qq.com','18329','男'),('a14770','142117','123456@qq.com','12265','女'),('a14840','172775','123456@qq.com','15874','女'),('a14856','116459','123456@qq.com','10674','女'),('a15044','157880','123456@qq.com','17457','男'),('a15048','158064','123456@qq.com','19980','男'),('a15092','126757','123456@qq.com','12148','女'),('a15175','145620','123456@qq.com','17569','女'),('a15253','198189','123456@qq.com','17584','女'),('a15259','196221','123456@qq.com','11630','女'),('a15290','137536','123456@qq.com','12803','男'),('a15320','158498','123456@qq.com','16520','男'),('a15514','157177','123456@qq.com','10265','男'),('a15597','112168','123456@qq.com','13804','男'),('a15608','143297','123456@qq.com','14861','男'),('a15707','194363','123456@qq.com','13989','男'),('a15913','141666','123456@qq.com','19349','女'),('a15918','138183','123456@qq.com','14558','女'),('a16008','176648','123456@qq.com','15955','女'),('a16192','162240','123456@qq.com','10473','男'),('a16247','141546','123456@qq.com','18908','女'),('a16290','151856','123456@qq.com','10380','男'),('a16336','166931','123456@qq.com','11245','女'),('a16372','144380','123456@qq.com','16960','男'),('a16517','124945','123456@qq.com','13096','女'),('a16700','154012','123456@qq.com','17138','男'),('a17104','181708','123456@qq.com','19697','男'),('a17159','188278','123456@qq.com','14842','男'),('a17358','181814','123456@qq.com','15291','女'),('a17413','175118','123456@qq.com','19697','男'),('a17562','147297','123456@qq.com','13160','女'),('a17582','119681','123456@qq.com','11151','男'),('a17589','172660','123456@qq.com','12044','男'),('a17714','135669','123456@qq.com','14900','女'),('a17797','130705','123456@qq.com','14062','女'),('a17904','136618','123456@qq.com','19282','女'),('a18049','151053','123456@qq.com','15168','男'),('a18173','118723','123456@qq.com','123456','男'),('a18245','132684','123456@qq.com','15411','女'),('a18324','192632','123456@qq.com','16619','女'),('a18326','114374','123456@qq.com','10029','女'),('a18457','159025','123456@qq.com','12988','女'),('a18580','122242','123456@qq.com','16983','男'),('a18780','166490','123456@qq.com','12542','男'),('a18823','140318','123456@qq.com','13808','男'),('a18886','185942','123456@qq.com','16252','女'),('a18939','134258','123456@qq.com','13010','女'),('a19023','156182','123456@qq.com','15849','女'),('a19033','159975','123456@qq.com','11546','女'),('a19058','139947','123456@qq.com','11503','女'),('a19161','187125','123456@qq.com','16971','男'),('a19196','177041','123456@qq.com','13034','男'),('a19270','167505','123456@qq.com','10141','男'),('a19558','177865','123456@qq.com','11243','男'),('a19595','123591','123456@qq.com','13112','男'),('a19663','102375','123456@qq.com','18346','男');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -156,4 +188,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-01 15:04:05
+-- Dump completed on 2021-07-07 15:04:27
