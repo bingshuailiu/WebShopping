@@ -39,6 +39,7 @@ public class OrderControl extends HttpServlet {
         return orders.size();
     }
     public int getOrderCount(String keyword){
+        System.out.println("getOrderCount");
         return getRelevantOrders(keyword).size();
     }
     public ArrayList<Order> getOrders(int pageIndex) throws SQLException{
@@ -52,6 +53,7 @@ public class OrderControl extends HttpServlet {
         return pageOrders;
     }
     public ArrayList<Order> getOrders(int pageIndex,String keyword) throws SQLException{
+        System.out.println("getOrders");
         ArrayList<Order> releItems= getRelevantOrders(keyword);
         ArrayList<Order> pageOrders=new ArrayList<>();
         int lIndex=(pageIndex-1)*10;

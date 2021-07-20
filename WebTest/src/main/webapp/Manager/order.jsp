@@ -3,13 +3,7 @@
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Classes.Order" %>
-<%@ page import="com.example.WebTest.OrderControl" %><%--
-  Created by IntelliJ IDEA.
-  User: 沐夏季风
-  Date: 2021/7/16
-  Time: 10:48
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.example.WebTest.OrderControl" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -33,8 +27,8 @@
         totalPage=(totalRecord-1)/10+1;
         if(request.getParameter("keyword")!=null){
             String keyword=request.getParameter("keyword");
-            orders=orderControl.getOrders(pageIndex,keyword);//获取查询内容一页的事件记录集,共10条
-            totalRecord=orderControl.getOrderCount(keyword);
+            orders=orderControl.getRelevantOrders(keyword);
+            totalRecord=orders.size();
             totalPage=(totalRecord-1)/10+1;
         }
         else if(request.getParameter("pageIndex")!=null){//不是第一次加载
